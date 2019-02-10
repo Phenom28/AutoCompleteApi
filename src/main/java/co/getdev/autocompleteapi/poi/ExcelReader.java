@@ -29,7 +29,8 @@ public class ExcelReader {
     private int timezoneCellNum = 17;
     private int latitudeCellNum = 4;
     private int longitudeCellNum = 5;
-    private String filePath = "C:/Users/Loretta/Desktop/Phenom/SuggestionDatabase.xlsx";
+    private final String fileName = "excel/SuggestionDatabase.xlsx";
+    ClassLoader classLoader = getClass().getClassLoader();
     
     private static final Logger LOGGER = Logger.getLogger(ExcelReader.class.getCanonicalName());
     
@@ -42,7 +43,7 @@ public class ExcelReader {
         City city;
         Workbook workbook;
         
-        try (FileInputStream input = new FileInputStream(new File(filePath))){
+        try (FileInputStream input = new FileInputStream(new File(classLoader.getResource(fileName).getFile()))){
             workbook = new XSSFWorkbook(input);
             Sheet citiesSheet = workbook.getSheet(getSheet());
             
